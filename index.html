@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Votaciones Universitario</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Página de Login -->
+        <div id="login-page" class="page active">
+            <div class="login-container">
+                <div class="login-header">
+                    <i class="fas fa-vote-yea"></i>
+                    <h1>Sistema de Votaciones</h1>
+                    <p>Universidad Santo Tomas</p>
+                </div>
+                
+                <form id="login-form" class="login-form">
+                    <div class="input-group">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="student-id" placeholder="Número de Estudiante" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="password" placeholder="Contraseña" required>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-sign-in-alt"></i>
+                        Iniciar Sesión
+                    </button>
+                </form>
+                
+                <div class="login-footer">
+                    <p>¿Eres administrador? <a href="#" id="admin-link">Acceso administrativo</a></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Página Principal de Votación -->
+        <div id="voting-page" class="page">
+            <header class="header">
+                <div class="header-content">
+                    <h1><i class="fas fa-vote-yea"></i> Sistema de Votaciones</h1>
+                    <div class="user-info">
+                        <span id="user-name"></span>
+                        <button id="logout-btn" class="btn btn-secondary">
+                            <i class="fas fa-sign-out-alt"></i>
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <main class="main-content">
+                <div class="voting-section">
+                    <h2>Elecciones Estudiantiles 2025</h2>
+                    <p class="election-description">
+                        Elige a tus representantes estudiantiles para el próximo período académico
+                    </p>
+
+                    <div id="elections-container">
+                        <!-- Las elecciones se cargan dinámicamente -->
+                    </div>
+
+                    <div class="voting-actions">
+                        <button id="submit-votes" class="btn btn-success" disabled>
+                            <i class="fas fa-check-circle"></i>
+                            Confirmar Votos
+                        </button>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <!-- Página de Resultados -->
+        <div id="results-page" class="page">
+            <header class="header">
+                <div class="header-content">
+                    <h1><i class="fas fa-chart-bar"></i> Resultados</h1>
+                    <button id="back-to-voting" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i>
+                        Volver
+                    </button>
+                </div>
+            </header>
+
+            <main class="main-content">
+                <div class="results-section">
+                    <h2>Resultados de las Elecciones</h2>
+                    <div id="results-container">
+                        <!-- Los resultados se cargan dinámicamente -->
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <!-- Página de Administración -->
+        <div id="admin-page" class="page">
+            <header class="header">
+                <div class="header-content">
+                    <h1><i class="fas fa-cog"></i> Panel de Administración</h1>
+                    <div class="admin-actions">
+                        <button id="view-results-admin" class="btn btn-info">
+                            <i class="fas fa-chart-line"></i>
+                            Ver Resultados
+                        </button>
+                        <button id="export-results" class="btn btn-success">
+                            <i class="fas fa-download"></i>
+                            Exportar
+                        </button>
+                        <button id="admin-logout" class="btn btn-secondary">
+                            <i class="fas fa-sign-out-alt"></i>
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <main class="main-content">
+                <div class="admin-section">
+                    <div class="admin-stats">
+                        <div class="stat-card">
+                            <h3>Total de Votos</h3>
+                            <span id="total-votes">0</span>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Participación</h3>
+                            <span id="participation-rate">0%</span>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Elecciones Activas</h3>
+                            <span id="active-elections">0</span>
+                        </div>
+                    </div>
+
+                    <div class="admin-results">
+                        <h3>Resultados Detallados</h3>
+                        <div id="admin-results-container">
+                            <!-- Resultados administrativos se cargan aquí -->
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <!-- Página de Confirmación -->
+        <div id="confirmation-page" class="page">
+            <div class="confirmation-container">
+                <div class="confirmation-content">
+                    <i class="fas fa-check-circle success-icon"></i>
+                    <h2>¡Voto Registrado Exitosamente!</h2>
+                    <p>Tu participación en las elecciones ha sido registrada correctamente.</p>
+                    
+                    <div class="confirmation-actions">
+                        <button id="view-results" class="btn btn-primary">
+                            <i class="fas fa-chart-bar"></i>
+                            Ver Resultados
+                        </button>
+                        <button id="finish-voting" class="btn btn-secondary">
+                            <i class="fas fa-home"></i>
+                            Finalizar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Confirmación -->
+    <div id="confirmation-modal" class="modal">
+        <div class="modal-content">
+            <h3>Confirmar Votación</h3>
+            <p>¿Estás seguro de que deseas enviar tus votos? Esta acción no se puede deshacer.</p>
+            <div class="modal-actions">
+                <button id="confirm-submit" class="btn btn-success">Sí, Confirmar</button>
+                <button id="cancel-submit" class="btn btn-secondary">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/voting.js"></script>
+    <script src="js/admin.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
